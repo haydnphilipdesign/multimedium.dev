@@ -27,7 +27,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" size="lg" className="self-start" disabled={pending}>
-      {pending ? "Sending..." : "Book a Free Consult"}
+      {pending ? "Sending..." : "Send inquiry"}
       <ChevronRight className="ml-2 h-4 w-4" aria-hidden="true" />
     </Button>
   );
@@ -36,6 +36,7 @@ function SubmitButton() {
 export function ContactForm() {
   const [state, formAction] = useFormState(submitContactForm, initialState);
   const projectTypeId = useId();
+  const websiteId = useId();
   const budgetId = useId();
   const timelineId = useId();
 
@@ -63,6 +64,12 @@ export function ContactForm() {
           <Input id="email" name="email" type="email" placeholder="you@company.com" autoComplete="email" required />
           <FieldError message={state.errors?.email} />
         </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor={websiteId}>Current website (optional)</Label>
+        <Input id={websiteId} name="website" placeholder="https://example.com" inputMode="url" />
+        <FieldError message={state.errors?.website} />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -100,12 +107,10 @@ export function ContactForm() {
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             )}
           >
-            <option value="" disabled>
-              Choose a range
-            </option>
+            <option value="">Choose a range</option>
             <option value="subscription">Subscription (under $500 upfront)</option>
-            <option value="500-3k">$500 – $3,000</option>
-            <option value="3k-8k">$3,000 – $8,000</option>
+            <option value="500-3k">$500 - $3,000</option>
+            <option value="3k-8k">$3,000 - $8,000</option>
             <option value="8k-plus">$8,000+</option>
           </select>
           <FieldError message={state.errors?.budget} />
@@ -123,11 +128,9 @@ export function ContactForm() {
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           )}
         >
-          <option value="" disabled>
-            When are you hoping to launch?
-          </option>
-          <option value="rush">Rush (0–4 weeks)</option>
-          <option value="standard">Standard (1–3 months)</option>
+          <option value="">When are you hoping to launch?</option>
+          <option value="rush">Rush (0-4 weeks)</option>
+          <option value="standard">Standard (1-3 months)</option>
           <option value="flexible">Flexible / exploring</option>
         </select>
         <FieldError message={state.errors?.timeline} />

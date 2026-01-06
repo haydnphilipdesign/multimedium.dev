@@ -19,14 +19,14 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#2563eb",
-          color: "#eff6ff",
+          background: "linear-gradient(135deg, #07090e 0%, #7c3aed 55%, #22d3ee 100%)",
+          color: "#ecf1fc",
           fontSize: 34,
           fontWeight: 700,
           fontFamily: "system-ui, sans-serif"
         }}
       >
-        M
+        MM
       </div>
     ),
     size

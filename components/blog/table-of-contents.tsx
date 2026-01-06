@@ -40,7 +40,7 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
   if (!items.length) return null;
 
   return (
-    <aside className="sticky top-28 hidden max-h-[70vh] min-w-[240px] flex-col rounded-2xl border border-surface-muted bg-surface px-5 py-6 text-sm text-ink-subtle lg:flex">
+    <aside className="sticky top-24 hidden max-h-[70vh] min-w-[240px] flex-col rounded-3xl border border-surface-muted bg-surface/50 px-5 py-6 text-sm text-ink-subtle shadow-soft backdrop-blur lg:flex">
       <p className="text-xs font-semibold uppercase tracking-wide text-ink">On this page</p>
       <ul className="mt-4 space-y-2">
         {items.map((item) => (

@@ -19,8 +19,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(120deg, #0f172a 0%, #1d4ed8 60%, #38bdf8 100%)",
-          color: "#eff6ff",
+          background: "linear-gradient(120deg, #07090e 0%, #7c3aed 52%, #22d3ee 100%)",
+          color: "#ecf1fc",
           width: "100%",
           height: "100%",
           padding: "60px"
@@ -32,22 +32,22 @@ export default function OpenGraphImage() {
               width: "72px",
               height: "72px",
               borderRadius: "999px",
-              background: "rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.14)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: 36
             }}
           >
-            M
+            MM
           </div>
           <span>Multimedium.dev</span>
         </div>
         <div style={{ maxWidth: "900px", fontSize: 64, fontWeight: 700, lineHeight: 1.1, textAlign: "center" }}>
-          Turn Website Visitors Into Customers
+          Websites That Look Premium and Convert
         </div>
         <div style={{ fontSize: 28, opacity: 0.9, textAlign: "center", marginTop: "20px" }}>
-          Modern HOA portals that residents actually use. Small business websites that convert browsers into bookings.
+          Strategy-led design + clean development for teams that want a site that ships fast and sells.
         </div>
       </div>
     ),

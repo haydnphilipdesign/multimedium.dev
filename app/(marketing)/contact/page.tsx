@@ -1,35 +1,25 @@
-﻿import Script from "next/script";
-import { Phone, CalendarDays, Clock3 } from "lucide-react";
+import Script from "next/script";
+import { CalendarDays, Clock3, Mail, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { MotionSection } from "@/components/motion-section";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ContactForm } from "@/components/contact-form";
+import { buildPrismBackground } from "@/lib/visual";
 import { createMetadata, buildBreadcrumbSchema } from "@/lib/seo";
+import { MotionSection } from "@/components/motion-section";
+import { Badge } from "@/components/ui/badge";
+import { ContactForm } from "@/components/contact-form";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Start a website, marketing, or HOA project with Multimedium.dev. Book a consult call with Haydn or request an HOA demo.",
+    "Start a web design, development, or growth project with Multimedium. Share your goals and get a tailored plan and timeline.",
   path: "/contact"
 });
 
-const availability = [
-  {
-    label: "Consultations",
-    value: "Monday – Thursday · 9am – 5pm ET"
-  },
-  {
-    label: "Workshops & walkthroughs",
-    value: "Evenings by appointment (onsite available across NEPA)"
-  },
-  {
-    label: "Response time",
-    value: "Within 1 business day"
-  },
-  {
-    label: "Emergency support",
-    value: "Available for active retainers"
-  }
+const expectations = [
+  { label: "Response time", value: "Within 1 business day" },
+  { label: "Typical build window", value: "4–6 weeks" },
+  { label: "Best call hours", value: "Mon–Thu • 9am–5pm ET" }
 ];
 
 export default function ContactPage() {
@@ -39,88 +29,96 @@ export default function ContactPage() {
   ]);
 
   return (
-    <div className="container grid gap-12 py-20 lg:grid-cols-[1.2fr_1fr]">
+    <div className="container grid gap-10 py-16 md:py-20 lg:grid-cols-[1.15fr_0.85fr]">
       <Script
         id="breadcrumb-contact"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <MotionSection className="space-y-6">
-        <div className="space-y-4">
-          <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">Let’s plan your next launch</h1>
-          <p className="text-base text-ink-subtle md:text-lg">
-            Share your organization, goals, and timeline. Haydn will follow up with a tailored roadmap or schedule an on-site or virtual walkthrough within one business day.
-          </p>
+
+      <MotionSection className="space-y-8">
+        <div className="relative overflow-hidden rounded-3xl border border-surface-muted bg-surface/50 px-8 py-10 shadow-soft">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-80"
+            style={{ backgroundImage: buildPrismBackground("contact") }}
+          />
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.10),rgba(0,0,0,0.35))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.35),rgba(0,0,0,0.70))]" />
+
+          <div className="relative space-y-4">
+            <Badge variant="secondary" className="w-fit bg-surface/60">
+              Contact
+            </Badge>
+            <h1 className="font-display text-4xl font-semibold leading-tight text-ink md:text-6xl">
+              Let&apos;s build your next site
+            </h1>
+            <p className="max-w-2xl text-base text-ink-subtle md:text-lg">
+              Tell me what you&apos;re building, what you want the site to do, and what constraints we should respect. I&apos;ll reply with a plan and timeline within one business day.
+            </p>
+          </div>
         </div>
-        <ContactForm />
+
+        <div className="rounded-3xl border border-surface-muted bg-surface/50 px-8 py-10 shadow-soft">
+          <ContactForm />
+        </div>
       </MotionSection>
 
-      <MotionSection className="space-y-6" delay={0.2}>
-        <Card className="space-y-4">
-          <CardHeader>
-            <CardTitle>Talk directly with Haydn</CardTitle>
-            <CardDescription>Preferred for quick questions or time-sensitive requests.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-ink">
+      <MotionSection className="space-y-6" delay={0.12}>
+        <div className="rounded-3xl border border-surface-muted bg-surface/50 px-8 py-8 shadow-soft">
+          <h2 className="font-display text-2xl font-semibold text-ink">Direct contact</h2>
+          <p className="mt-2 text-sm text-ink-subtle">
+            Prefer a quick call or email? Here are the fastest ways to reach me.
+          </p>
+
+          <div className="mt-6 grid gap-3 text-sm">
             {siteConfig.calendar ? (
               <a
                 href={siteConfig.calendar}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 rounded-xl border border-brand/40 bg-brand/10 px-4 py-3 font-medium text-brand transition hover:bg-brand/20"
+                className="flex items-center gap-2 rounded-2xl border border-surface-muted bg-surface/40 px-4 py-4 text-ink-subtle transition hover:border-brand/40 hover:text-ink"
               >
-                <CalendarDays className="h-4 w-4" aria-hidden="true" />
-                Schedule a strategy call
+                <CalendarDays className="h-4 w-4 text-brand" aria-hidden="true" />
+                Book a call
               </a>
             ) : null}
-            <a href={`tel:${siteConfig.phoneInternational}`} className="flex items-center gap-2 rounded-xl border border-surface-muted bg-surface-muted px-4 py-3 transition hover:border-brand hover:text-brand">
-              <Phone className="h-4 w-4" aria-hidden="true" />
+            <a
+              href={`tel:${siteConfig.phoneInternational}`}
+              className="flex items-center gap-2 rounded-2xl border border-surface-muted bg-surface/40 px-4 py-4 text-ink-subtle transition hover:border-brand/40 hover:text-ink"
+            >
+              <Phone className="h-4 w-4 text-brand" aria-hidden="true" />
               Call or text {siteConfig.phone}
             </a>
-            <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-2 rounded-xl border border-surface-muted bg-surface-muted px-4 py-3 transition hover:border-brand hover:text-brand">
-              <Clock3 className="h-4 w-4" aria-hidden="true" />
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="flex items-center gap-2 rounded-2xl border border-surface-muted bg-surface/40 px-4 py-4 text-ink-subtle transition hover:border-brand/40 hover:text-ink"
+            >
+              <Mail className="h-4 w-4 text-brand" aria-hidden="true" />
               {siteConfig.email}
             </a>
-            <div className="flex items-start gap-2 rounded-xl border border-surface-muted bg-surface-muted px-4 py-3">
-              <CalendarDays className="mt-0.5 h-4 w-4 text-brand" aria-hidden="true" />
-              <div>
-                <p className="font-medium text-ink">Availability</p>
-                <ul className="mt-2 space-y-1 text-xs text-ink-subtle">
-                  {availability.map((item) => (
-                    <li key={item.label}>
-                      <span className="font-medium text-ink">{item.label}:</span> {item.value}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="space-y-4">
-          <CardHeader>
-            <CardTitle>Serving the Poconos & remote clients</CardTitle>
-            <CardDescription>Based in {siteConfig.location.city}, {siteConfig.location.region}. Available for on-site HOA workshops across NEPA.</CardDescription>
-          </CardHeader>
-          <CardContent className="text-sm text-ink">
-            <p>
-              From restaurants in Stroudsburg to HOA boards in Bushkill and professional services nationwide—Multimedium.dev delivers sites that clarify your brand and simplify operations.
-            </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-surface-muted bg-surface/50 px-8 py-8 shadow-soft">
+          <h2 className="font-display text-2xl font-semibold text-ink">What to expect</h2>
+          <ul className="mt-5 space-y-3 text-sm text-ink-subtle">
+            {expectations.map((item) => (
+              <li key={item.label} className="flex items-start gap-3">
+                <Clock3 className="mt-0.5 h-4 w-4 text-brand" aria-hidden="true" />
+                <span>
+                  <span className="font-semibold text-ink">{item.label}:</span> {item.value}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7">
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/work">See examples of recent work</Link>
+            </Button>
+          </div>
+        </div>
       </MotionSection>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

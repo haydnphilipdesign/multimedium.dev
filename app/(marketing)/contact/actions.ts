@@ -12,8 +12,18 @@ const schema = z.object({
   name: z.string().min(2, "Please enter your name."),
   email: z.string().email("Enter a valid email address."),
   projectType: z.string().min(2, "Select a project type."),
-  budget: z.string().min(1, "Let us know your budget range."),
-  timeline: z.string().min(1, "Select a timeline."),
+  website: z.preprocess(
+    (value) => (typeof value === "string" && value.trim().length === 0 ? undefined : value),
+    z.string().url("Enter a valid URL (include https://).").optional()
+  ),
+  budget: z.preprocess(
+    (value) => (typeof value === "string" && value.trim().length === 0 ? undefined : value),
+    z.string().optional()
+  ),
+  timeline: z.preprocess(
+    (value) => (typeof value === "string" && value.trim().length === 0 ? undefined : value),
+    z.string().optional()
+  ),
   goals: z.string().min(10, "Share a bit more about your goals."),
   company: z.string().optional()
 });

@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Multimedium.dev",
   shortName: "Multimedium",
   description:
-    "Professional web design, development, and marketing for businesses across the Poconos and NEPA. Trusted by service providers, retailers, professional firms, and organizations that want to convert visitors into customers.",
+    "Conversion-first web design and development for teams that want to look premium, load fast, and turn attention into inquiries. Based in the Poconos — available remote.",
   url: "https://multimedium.dev",
   locale: "en_US",
   owner: "Haydn",
@@ -18,28 +18,29 @@ export const siteConfig = {
   focusAreas: [
     "Web design",
     "Web development",
+    "Conversion strategy",
     "Marketing & SEO",
-    "Small business websites",
-    "AI automation"
+    "Automation & portals"
   ],
   baseKeywords: [
     "web design poconos",
     "web development nepa",
-    "small business websites",
+    "conversion focused web design",
     "next.js agency",
     "marketing automation",
     "seo consultant",
     "professional web design",
     "business website design",
+    "website redesign",
     "ai chatbot integration",
     "multimedium.dev"
   ],
   navItems: [
+    { label: "Work", href: "/work" },
     { label: "Services", href: "/services" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" }
+    { label: "Notes", href: "/blog" }
   ],
   social: {
     linkedin: "https://www.linkedin.com/in/haydnm",
@@ -48,14 +49,14 @@ export const siteConfig = {
     dribbble: "https://dribbble.com/multimedium"
   },
   hero: {
-    headline: "Turn Website Visitors Into Customers",
+    headline: "Websites That Look Premium and Convert",
     subheadline:
-      "Professional websites that convert browsers into bookings. Trusted by service providers, retailers, and growing businesses across the Poconos."
+      "Strategy-led design and clean Next.js builds that ship fast, load fast, and make contacting you feel inevitable."
   },
   heroAlt: {
     headline: "Make Your Business Look Established",
     subheadline:
-      "High-converting websites designed to capture leads and build trust—whether you're a team of 3 or 30."
+      "High-converting websites designed to capture leads and build trust-whether you're a team of 3 or 30."
   }
 };
 

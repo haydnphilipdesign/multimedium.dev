@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { siteConfig } from "@/config/site";
+import { buildPrismBackground } from "@/lib/visual";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +11,7 @@ import { TableOfContents } from "@/components/blog/table-of-contents";
 import { createMetadata, buildBreadcrumbSchema } from "@/lib/seo";
 import { NewsletterSignup } from "@/components/blog/newsletter-signup";
 import { BlogCard } from "@/components/blog/blog-card";
+import { MotionSection } from "@/components/motion-section";
 
 type PageProps = {
   params: {
@@ -25,12 +27,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
   if (!post) {
-    return {
-      title: "Post not found"
-    };
+    return { title: "Post not found" };
   }
 
-  const metadata = createMetadata({
+  return createMetadata({
     title: post.frontmatter.title,
     description: post.frontmatter.description,
     path: `/blog/${post.slug}`,
@@ -38,8 +38,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     image: post.frontmatter.heroImage ? `${siteConfig.url}${post.frontmatter.heroImage}` : undefined,
     publishedTime: post.frontmatter.date
   });
-
-  return metadata;
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
@@ -53,7 +51,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const breadcrumb = buildBreadcrumbSchema([
     { name: "Home", path: "/" },
-    { name: "Blog", path: "/blog" },
+    { name: "Notes", path: "/blog" },
     { name: post.frontmatter.title, path: `/blog/${post.slug}` }
   ]);
 
@@ -96,43 +94,59 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="relative">
       <ReadingProgress />
-      <div className="container flex flex-col gap-12 py-16 lg:flex-row">
-        <article className="flex-1">
-          <header className="space-y-4">
-            <Badge variant="secondary">{post.frontmatter.category}</Badge>
-            <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
+
+      <div className="container space-y-10 py-14 md:py-20">
+        <MotionSection className="relative overflow-hidden rounded-3xl border border-surface-muted bg-surface/50 px-8 py-10 shadow-soft md:px-12">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-80"
+            style={{ backgroundImage: buildPrismBackground(post.slug) }}
+          />
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.10),rgba(0,0,0,0.35))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.35),rgba(0,0,0,0.70))]" />
+
+          <header className="relative max-w-3xl space-y-4">
+            <Badge variant="secondary" className="w-fit bg-surface/60">
+              {post.frontmatter.category}
+            </Badge>
+            <h1 className="font-display text-4xl font-semibold leading-tight text-ink md:text-6xl">
               {post.frontmatter.title}
             </h1>
             <p className="text-sm text-ink-subtle">
-              Published {formatDate(post.frontmatter.date)} · {post.readingTime}
+              Published {formatDate(post.frontmatter.date)} • {post.readingTime}
             </p>
           </header>
-          <div id="post-content" className="prose prose-slate mt-10 max-w-none dark:prose-invert">
-            {post.content}
-          </div>
-        </article>
+        </MotionSection>
 
-        <TableOfContents items={post.headings} />
-      </div>
-
-      <div className="container mt-16 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
-        <section className="space-y-4 rounded-3xl border border-brand/20 bg-brand/5 px-8 py-10 shadow-soft">
-          <h2 className="font-display text-2xl font-semibold text-ink">Get more insights in your inbox</h2>
-          <p className="text-sm text-ink-subtle">
-            Monthly updates on web design, SEO, and HOA communication—no spam, just practical workflows you can implement.
-          </p>
-          <NewsletterSignup tag={post.frontmatter.category} />
-        </section>
-        {relatedPosts.length ? (
-          <section className="space-y-4 rounded-3xl border border-surface-muted bg-surface px-6 py-8 shadow-soft">
-            <h2 className="font-display text-xl font-semibold text-ink">Related reading</h2>
-            <div className="grid gap-4">
-              {relatedPosts.map((related) => (
-                <BlogCard key={related.slug} post={related} />
-              ))}
+        <div className="flex flex-col gap-12 lg:flex-row">
+          <article className="min-w-0 flex-1">
+            <div id="post-content" className="prose prose-slate max-w-none dark:prose-invert">
+              {post.content}
             </div>
+          </article>
+
+          <TableOfContents items={post.headings} />
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <section className="space-y-4 rounded-3xl border border-surface-muted bg-surface/50 px-8 py-10 shadow-soft">
+            <h2 className="font-display text-2xl font-semibold text-ink">Get new notes in your inbox</h2>
+            <p className="text-sm text-ink-subtle">
+              Monthly updates on design systems, conversion, and performance. No spam—just ship-ready ideas.
+            </p>
+            <NewsletterSignup tag={post.frontmatter.category} />
           </section>
-        ) : null}
+
+          {relatedPosts.length ? (
+            <section className="space-y-4 rounded-3xl border border-surface-muted bg-surface/50 px-6 py-8 shadow-soft">
+              <h2 className="font-display text-xl font-semibold text-ink">Related</h2>
+              <div className="grid gap-4">
+                {relatedPosts.map((related) => (
+                  <BlogCard key={related.slug} post={related} />
+                ))}
+              </div>
+            </section>
+          ) : null}
+        </div>
       </div>
 
       <Script
@@ -148,3 +162,4 @@ export default async function BlogPostPage({ params }: PageProps) {
     </div>
   );
 }
+

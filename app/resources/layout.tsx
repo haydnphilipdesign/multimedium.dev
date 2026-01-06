@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     default: "Free Resources",
     template: `%s | ${siteConfig.name}`
   },
-  description: "Free guides, checklists, and templates for small businesses and HOA boards looking to improve their online presence."
+  description: "Free guides, checklists, and templates on design, conversion, and website performance."
 };
 
 export default function ResourcesLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="container py-20">
+    <div className="container py-16 md:py-20">
       {children}
     </div>
   );

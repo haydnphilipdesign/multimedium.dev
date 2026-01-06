@@ -20,30 +20,44 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#2457d6",
-          foreground: "#eef3ff"
+          DEFAULT: "rgb(var(--brand) / <alpha-value>)",
+          foreground: "rgb(var(--brand-foreground) / <alpha-value>)",
+          2: "rgb(var(--brand-2) / <alpha-value>)",
+          3: "rgb(var(--brand-3) / <alpha-value>)"
         },
         ink: {
-          DEFAULT: "#0f172a",
-          muted: "#324155",
-          subtle: "#8ea0b6",
-          contrast: "#f7f9fc"
+          DEFAULT: "rgb(var(--ink) / <alpha-value>)",
+          muted: "rgb(var(--ink-muted) / <alpha-value>)",
+          subtle: "rgb(var(--ink-subtle) / <alpha-value>)",
+          contrast: "rgb(var(--ink-contrast) / <alpha-value>)"
         },
         surface: {
-          DEFAULT: "#ffffff",
-          muted: "#edf2f7",
-          dark: "#0b1629"
+          DEFAULT: "rgb(var(--surface) / <alpha-value>)",
+          muted: "rgb(var(--surface-muted) / <alpha-value>)",
+          dark: "rgb(var(--surface-dark) / <alpha-value>)"
         }
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui"],
-        display: ["var(--font-jakarta)", "system-ui"]
+        display: ["var(--font-space)", "var(--font-inter)", "system-ui"],
+        mono: [
+          "var(--font-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "\"Liberation Mono\"",
+          "\"Courier New\"",
+          "monospace"
+        ]
       },
       borderRadius: {
         lg: "0.75rem"
       },
       boxShadow: {
-        soft: "0 10px 40px -20px rgba(15, 23, 42, 0.4)"
+        soft: "0 30px 90px -55px rgba(0, 0, 0, 0.8)",
+        glow: "0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 90px -55px rgba(0, 0, 0, 0.9)"
       },
       keyframes: {
         "fade-up": {

@@ -33,7 +33,7 @@ export function ReadingProgress() {
     <div
       role="presentation"
       aria-hidden="true"
-      className="fixed inset-x-0 top-0 z-40 h-1 bg-brand"
+      className="fixed inset-x-0 top-0 z-[60] h-1 bg-brand"
       style={{ transform: `scaleX(${progress / 100})`, transformOrigin: "0 0" }}
     />
   );

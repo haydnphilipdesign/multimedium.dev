@@ -39,7 +39,7 @@ export function NewsletterSignup({ tag }: { tag?: string }) {
       </Button>
       {state.message ? (
         <p
-          className={state.status === "success" ? "text-sm text-emerald-600" : "text-sm text-red-600"}
+          className={state.status === "success" ? "text-sm text-emerald-500" : "text-sm text-red-500"}
           role="status"
         >
           {state.message}

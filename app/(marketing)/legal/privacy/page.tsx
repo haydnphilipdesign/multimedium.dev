@@ -32,12 +32,12 @@ export default function PrivacyPage() {
       <p>We collect information that you voluntarily provide when:</p>
       <ul>
         <li>Completing contact forms or booking a consultation</li>
-        <li>Requesting an HOA website demo</li>
+        <li>Requesting a portal walkthrough</li>
         <li>Subscribing to updates or resources</li>
         <li>Engaging Multimedium.dev for client services</li>
       </ul>
       <p>
-        This may include your name, email address, phone number, organization details, project goals, and any additional context you choose to share. For HOA portals, resident data is handled according to the board’s direction and applicable regulations.
+        This may include your name, email address, phone number, organization details, project goals, and any additional context you choose to share. For member portals, user data is handled according to the client’s direction and applicable regulations.
       </p>
 
       <h2>How We Use Information</h2>

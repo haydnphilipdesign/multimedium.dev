@@ -55,9 +55,9 @@ export default function TermsPage() {
         Upon full payment, ownership of final project deliverables transfers to the client unless otherwise specified. Multimedium.dev retains the right to showcase work in portfolios and marketing materials.
       </p>
 
-      <h2>HOA & Resident Data</h2>
+      <h2>Portal Data</h2>
       <p>
-        HOA website deployments may collect resident information as instructed by the board or management company. Multimedium.dev acts as a processor, and the HOA retains responsibility for data governance and compliance.
+        Portal deployments may collect member or resident information as instructed by the client. Multimedium.dev acts as a processor, and the client retains responsibility for data governance and compliance.
       </p>
 
       <h2>Limitation of Liability</h2>

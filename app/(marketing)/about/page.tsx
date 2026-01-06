@@ -1,47 +1,51 @@
-import Script from "next/script";
 import Image from "next/image";
-import { GaugeCircle, Layers, Target } from "lucide-react";
+import Link from "next/link";
+import Script from "next/script";
+import { ArrowRight, BadgeCheck, Layers, MapPin, Sparkles } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { buildPrismBackground } from "@/lib/visual";
+import { createMetadata, buildBreadcrumbSchema } from "@/lib/seo";
 import { MotionSection } from "@/components/motion-section";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createMetadata, buildBreadcrumbSchema } from "@/lib/seo";
-import { HeroParallaxBackground } from "@/components/hero-parallax";
+import { Button } from "@/components/ui/button";
 
 export const metadata = createMetadata({
-  title: "About Haydn",
+  title: `About ${siteConfig.owner}`,
   description:
-    "Meet Haydn from Multimedium.dev – a designer-developer hybrid delivering web design, development, marketing, and AI automation for SMBs and HOA communities.",
+    "Meet Haydn — a designer-developer building conversion-focused websites, design systems, and portals for teams that need to look premium and ship fast.",
   path: "/about"
 });
 
 const values = [
   {
     icon: Layers,
-    title: "Design × Engineering",
-    description: "Great experiences happen when design and development happen in the same brain. Every engagement blends brand, UX, and code from day one."
+    title: "Design × engineering",
+    description:
+      "A cohesive system beats a pretty page. Every build connects narrative, UI, and code so the site stays clean as you grow."
   },
   {
-    icon: GaugeCircle,
-    title: "Accessible & Fast",
-    description: "Performance and accessibility are guardrails, not nice-to-haves. Expect Lighthouse ≥90, WCAG 2.2 AA compliance, and modern DX."
+    icon: BadgeCheck,
+    title: "Performance + accessibility",
+    description:
+      "Speed and accessibility aren’t “nice-to-haves.” They’re trust signals—and they keep your site usable for everyone."
   },
   {
-    icon: Target,
-    title: "Outcome-Focused",
-    description: "Projects tie to business or community metrics—bookings, lead volume, resident engagement. Reporting makes impact tangible."
+    icon: Sparkles,
+    title: "Momentum over perfectionism",
+    description:
+      "Ship the right version fast, then iterate what converts. The goal is outcomes, not endless design loops."
   }
 ];
 
-const toolStack = [
-  "Next.js · TypeScript",
-  "Tailwind CSS · shadcn/ui",
-  "Framer Motion · Three.js",
-  "Sanity · Contentful · Storyblok",
-  "Supabase · PlanetScale · Prisma",
-  "Resend · Postmark · Twilio",
-  "Make.com · Zapier · n8n",
-  "HubSpot · Pipedrive · Salesforce"
+const toolbox = [
+  "Next.js • TypeScript",
+  "Tailwind CSS • Component systems",
+  "Framer Motion • Micro-interactions",
+  "Sanity • Contentful • MDX",
+  "Vercel • Supabase",
+  "Resend • Postmark • Twilio",
+  "Zapier • Make.com • n8n",
+  "GA4 • Search Console • Dashboards"
 ];
 
 export default function AboutPage() {
@@ -51,30 +55,63 @@ export default function AboutPage() {
   ]);
 
   return (
-    <div className="container space-y-16 py-20">
+    <div className="container space-y-14 py-16 md:py-20">
       <Script
         id="breadcrumb-about"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <MotionSection className="relative mx-auto flex max-w-3xl flex-col gap-5 text-center">
-        <HeroParallaxBackground />
-        <Badge variant="secondary">Meet Haydn</Badge>
-        <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
-          Designer, developer, and marketing strategist in one partner
-        </h1>
-        <p className="text-lg text-ink-subtle">
-          Multimedium.dev is the solo practice of Haydn—a web designer and engineer who helps businesses and organizations look polished, communicate clearly, and automate the busywork across the Poconos and NEPA.
-        </p>
-        <div className="mt-6 flex justify-center">
-          <div className="relative h-56 w-56 rounded-full bg-gradient-to-tr from-brand/60 via-blue-400/50 to-indigo-400/40 p-1.5 shadow-soft sm:h-64 sm:w-64">
-            <div className="relative h-full w-full overflow-hidden rounded-full bg-surface">
+
+      <MotionSection className="relative overflow-hidden rounded-3xl border border-surface-muted bg-surface/50 p-8 shadow-soft md:p-12">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-80"
+          style={{ backgroundImage: buildPrismBackground("about") }}
+        />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.10),rgba(0,0,0,0.35))] dark:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.35),rgba(0,0,0,0.70))]" />
+
+        <div className="relative grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge variant="secondary" className="bg-surface/60">
+                About
+              </Badge>
+              <span className="inline-flex items-center gap-2 rounded-full border border-surface-muted bg-surface/50 px-4 py-1 text-xs text-ink-subtle">
+                <MapPin className="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+                {siteConfig.location.city}, {siteConfig.location.region} • Remote friendly
+              </span>
+            </div>
+
+            <h1 className="font-display text-4xl font-semibold leading-tight text-ink md:text-6xl">
+              I’m {siteConfig.owner}.
+              <br />
+              I design and build sites that feel inevitable.
+            </h1>
+
+            <p className="max-w-2xl text-base leading-relaxed text-ink-subtle md:text-lg">
+              Multimedium is my solo practice—built around one simple idea: the best work happens when strategy, design, and development live in the same feedback loop. You get fewer meetings, faster decisions, and a site that stays consistent as you ship new pages.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="lg">
+                <Link href="/contact">Start a project</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/work">
+                  See case studies <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative h-56 w-56 overflow-hidden rounded-[32px] border border-white/10 bg-surface/40 shadow-soft md:h-72 md:w-72">
               <Image
                 src="/haydn.jpg"
-                alt="Haydn, founder of Multimedium.dev"
+                alt="Haydn"
                 fill
-                sizes="(min-width: 640px) 256px, 224px"
-                className="object-cover object-[50%_35%]"
+                sizes="(min-width: 768px) 288px, 224px"
+                className="object-cover"
                 priority
               />
             </div>
@@ -82,106 +119,55 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="space-y-12" delay={0.15}>
-        <div className="grid items-center gap-10 md:grid-cols-2">
-          <div className="space-y-4">
-            <Badge>Haydn’s Approach</Badge>
-            <h2 className="font-display text-3xl font-semibold text-ink">
-              Holistic engagements that start with listening
-            </h2>
-            <p className="text-base text-ink-subtle">
-              Projects begin with a workshop—virtual or on-site in the Poconos—to understand your audience, business priorities, and operational realities. From there we co-create a roadmap that balances quick wins with long-term scalability.
-            </p>
-            <p className="text-base text-ink-subtle">
-              With design, development, and marketing under one roof, handoffs disappear. You get thoughtful UX, performant code, and campaigns ready to ship—without assembling a full agency.
-            </p>
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="relative h-56 w-full max-w-[22rem] overflow-hidden rounded-3xl border border-surface-muted shadow-soft">
-              <Image
-                src="/quotes/c8f98d10-a96a-4fe5-be57-8c65d3ffc75f.png"
-                alt="Business card quote artwork"
-                fill
-                className="object-contain object-center"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-        <div className="grid items-center gap-10 md:grid-cols-2">
-          <div className="flex items-center justify-center md:order-2">
-            <div className="relative h-56 w-full max-w-[22rem] overflow-hidden rounded-3xl border border-surface-muted shadow-soft">
-              <Image
-                src="/quotes/d14c8d0c-d137-4c84-b66c-dd2794e7c6d0.png"
-                alt="Business card quote artwork"
-                fill
-                className="object-contain object-center"
-                priority
-              />
-            </div>
-          </div>
-          <div className="space-y-4 md:order-1">
-            <Badge>Experience</Badge>
-            <h2 className="font-display text-3xl font-semibold text-ink">
-              10+ years of digital strategy
-            </h2>
-            <p className="text-base text-ink-subtle">
-              From hospitality groups rolling out new ordering systems to organizations modernizing member portals, the through-line is pairing real empathy for users with technical execution—and presenting progress in stakeholder-friendly language.
-            </p>
-            <p className="text-base text-ink-subtle">
-              Partnerships extend beyond launch. Clients stick around for marketing retainers, ongoing support services, and AI enablement projects that reduce manual tasks.
-            </p>
-          </div>
-        </div>
-      </MotionSection>
-
-      <MotionSection className="grid gap-6 md:grid-cols-3" delay={0.25}>
+      <MotionSection className="grid gap-6 md:grid-cols-3" delay={0.12}>
         {values.map((value) => (
-          <Card key={value.title} className="space-y-4 border border-surface-muted bg-surface p-6">
-            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
-              <value.icon className="h-6 w-6" aria-hidden="true" />
+          <div
+            key={value.title}
+            className="rounded-3xl border border-surface-muted bg-surface/50 px-7 py-7 shadow-soft"
+          >
+            <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-surface-muted bg-surface/50 text-brand">
+              <value.icon className="h-5 w-5" aria-hidden="true" />
             </div>
-            <CardHeader className="p-0">
-              <CardTitle className="text-xl">{value.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0 text-sm text-ink-subtle">{value.description}</CardContent>
-          </Card>
+            <h2 className="mt-5 font-display text-xl font-semibold text-ink">{value.title}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-ink-subtle">{value.description}</p>
+          </div>
         ))}
       </MotionSection>
 
-      <MotionSection className="rounded-3xl border border-surface-muted bg-surface px-8 py-10 shadow-soft" delay={0.35}>
-        <h2 className="font-display text-2xl font-semibold text-ink">Toolbox</h2>
-        <p className="mt-2 max-w-xl text-sm text-ink-subtle">
-          Flexible with your stack, opinionated about quality. Here are the platforms and tools used most often with clients.
-        </p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {toolStack.map((item) => (
-            <div key={item} className="rounded-2xl border border-surface-muted bg-surface-muted px-4 py-3 text-sm text-ink">
-              {item}
-            </div>
-          ))}
+      <MotionSection className="grid gap-10 rounded-3xl border border-surface-muted bg-surface/50 px-8 py-12 shadow-soft lg:grid-cols-[1.1fr_0.9fr]" delay={0.2}>
+        <div className="space-y-4">
+          <Badge className="w-fit">How I work</Badge>
+          <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
+            Clear deliverables, no agency fog
+          </h2>
+          <p className="text-base text-ink-subtle">
+            You’ll always know what’s happening, what you need to review, and what comes next. I keep projects moving with weekly checkpoints and simple decision docs—so momentum doesn’t die in Slack threads.
+          </p>
+          <ul className="grid gap-2 text-sm text-ink-subtle">
+            <li>• Short workshop to lock positioning + page plan</li>
+            <li>• High-fidelity design with real copy (not lorem ipsum)</li>
+            <li>• Component build + CMS / editing workflow</li>
+            <li>• Launch checklist, analytics, and next-step roadmap</li>
+          </ul>
         </div>
-      </MotionSection>
-
-      <MotionSection className="rounded-3xl border border-brand/20 bg-brand/5 px-8 py-10 shadow-soft" delay={0.45}>
-        <h2 className="font-display text-2xl font-semibold text-ink">Let’s build what’s next</h2>
-        <p className="mt-2 max-w-2xl text-sm text-ink-subtle">
-          Whether you need a fast business launch, a membership portal, or an AI-powered workflow, the next step is a quick consult call with Haydn tailored to your leadership team and goals.
-        </p>
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <a className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-brand-foreground shadow-soft transition hover:bg-[#1d4fd7]" href="/contact">
-            Book a Free Consult
-          </a>
-          <a className="rounded-full border border-brand px-6 py-3 text-sm font-semibold text-brand transition hover:bg-brand hover:text-brand-foreground" href={`tel:${siteConfig.phoneInternational}`}>
-            Call {siteConfig.phone}
-          </a>
+        <div className="space-y-4">
+          <h3 className="font-display text-2xl font-semibold text-ink">Toolbox</h3>
+          <p className="text-sm text-ink-subtle">
+            Flexible with your stack, opinionated about quality.
+          </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {toolbox.map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-surface-muted bg-surface/50 px-3 py-1 text-xs text-ink-subtle"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </MotionSection>
     </div>
   );
 }
-
-
-
-
 
