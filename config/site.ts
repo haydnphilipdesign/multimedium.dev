@@ -9,7 +9,7 @@ export const siteConfig = {
   phone: "570-994-6186",
   phoneInternational: "+15709946186",
   email: "haydn@multimedium.dev",
-  calendar: "https://cal.com/multimedium/consult",
+  calendar: "",
   location: {
     city: "Poconos",
     region: "Pennsylvania",
