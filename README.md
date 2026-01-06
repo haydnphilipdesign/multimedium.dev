@@ -32,10 +32,10 @@ npm start
 
 ## Deploying to Vercel
 1. Push this repository to GitHub.
-2. “Import Project” on Vercel, pointing to the repo.
+2. "Import Project" on Vercel, pointing to the repo.
 3. Ensure the build command is `npm run build` and output is `.next`.
 4. Set environment variables (see Forms & Integrations).
-5. Trigger the first deploy.
+5. Vercel will deploy on every push to `main`.
 
 ## Content & Customization
 
