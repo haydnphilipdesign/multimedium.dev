@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Dribbble, Github, Linkedin, Mail, MapPin, PenTool, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
@@ -35,7 +35,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="space-y-4 md:col-span-3">
+        <div className="space-y-4 md:col-span-4">
           <h3 className="text-xs font-semibold uppercase tracking-widest text-ink">Explore</h3>
           <nav className="flex flex-col gap-2 text-sm text-ink-subtle">
             <Link className="hover:text-ink" href="/work">
@@ -56,7 +56,7 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <div className="space-y-4 md:col-span-2">
+        <div className="space-y-4 md:col-span-3">
           <h3 className="text-xs font-semibold uppercase tracking-widest text-ink">Details</h3>
           <nav className="flex flex-col gap-2 text-sm text-ink-subtle">
             <Link className="hover:text-ink" href="/contact">
@@ -69,48 +69,6 @@ export function SiteFooter() {
               Terms of Service
             </Link>
           </nav>
-        </div>
-
-        <div className="space-y-4 md:col-span-2">
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-ink">Social</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <a
-              className="inline-flex items-center gap-2 rounded-xl border border-surface-muted bg-surface/60 px-3 py-2 text-sm text-ink-subtle transition hover:border-brand/40 hover:text-ink"
-              href={siteConfig.social.linkedin}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Linkedin className="h-4 w-4 text-brand" aria-hidden="true" />
-              LinkedIn
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-xl border border-surface-muted bg-surface/60 px-3 py-2 text-sm text-ink-subtle transition hover:border-brand/40 hover:text-ink"
-              href={siteConfig.social.github}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github className="h-4 w-4 text-brand" aria-hidden="true" />
-              GitHub
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-xl border border-surface-muted bg-surface/60 px-3 py-2 text-sm text-ink-subtle transition hover:border-brand/40 hover:text-ink"
-              href={siteConfig.social.dribbble}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Dribbble className="h-4 w-4 text-brand" aria-hidden="true" />
-              Dribbble
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-xl border border-surface-muted bg-surface/60 px-3 py-2 text-sm text-ink-subtle transition hover:border-brand/40 hover:text-ink"
-              href={siteConfig.social.behance}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <PenTool className="h-4 w-4 text-brand" aria-hidden="true" />
-              Behance
-            </a>
-          </div>
         </div>
       </div>
 
